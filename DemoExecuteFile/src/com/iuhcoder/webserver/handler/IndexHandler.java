@@ -43,7 +43,13 @@ public class IndexHandler extends HttpServlet {
 				"  <form>\r\n" + 
 				"    <div class=\"form-group\">\r\n" + 
 				"      <label for=\"comment\">Source code</label>\r\n" + 
-				"      <textarea  spellcheck=\"false\" class=\"form-control\" rows=\"15\" id=\"sourceCode\"></textarea>\r\n" + 
+				"      <textarea  spellcheck=\"false\" class=\"form-control\" rows=\"10\" id=\"sourceCode\"></textarea>\r\n" + 
+				"    </div>\r\n" + 
+				"  </form>\r\n" + 
+				"  <form>\r\n" + 
+				"    <div class=\"form-group\">\r\n" + 
+				"      <label for=\"comment\">Input</label>\r\n" + 
+				"      <textarea  spellcheck=\"false\" class=\"form-control\" rows=\"3\" id=\"input\"></textarea>\r\n" + 
 				"    </div>\r\n" + 
 				"  </form>\r\n" + 
 				"  <input type = \"button\" onclick = \"compile()\" id = \"btnCompile\" class = \"btn btn-primary\" value = \"Compile\" />\r\n" + 
@@ -60,12 +66,15 @@ public class IndexHandler extends HttpServlet {
 				"\r\n" + 
 				"function compile() {\r\n" + 
 				"  var sourceCode = $('#sourceCode').val();\r\n" + 
+				"  var inputValue = $('#input').val();\r\n" + 
+				"  \r\n" + 
 				"  $.post(\"http://localhost:9090/compile\",\r\n" + 
 				"    {\r\n" + 
-				"        source: sourceCode\r\n" + 
+				"        source: sourceCode,\r\n" + 
+				"        input: inputValue\r\n" + 
 				"    },\r\n" + 
 				"    function(data, status){\r\n" + 
-				"        alert(\"Data: \" + data + \"\\nStatus: \" + status);\r\n" + 
+				"        document.getElementById(\"console\").innerHTML = data;\r\n" + 
 				"    });\r\n" + 
 				"  \r\n" + 
 				"}\r\n" + 

@@ -24,7 +24,7 @@ public class MainApp {
 		handler.addServletWithMapping(IndexHandler.class, "/");
 		handler.addServletWithMapping(CompileHandler.class, "/compile");
 		server.setHandler(handler);
-	
+		
 		server.start();
 		server.join();
 	}

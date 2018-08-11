@@ -3,6 +3,11 @@ package com.iuhcoder.compiler;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import com.iuhcoder.compiler.model.ProgrammingLanguage;
 
 /**
  * 
@@ -13,6 +18,7 @@ public class CPlusPlusCompiler implements IuhCoderCompiler{
 	
 	public static final String COMPILE_PATTERN = "g++ -o %out% %input%";
 	public static final String TMP_DIR = "E:/TmpDir/";
+	public static final String TMP_NAME = "main";
 	public static final String EXECUTE_DIR = "E://Execute/";
 
 	@Override
@@ -40,15 +46,18 @@ public class CPlusPlusCompiler implements IuhCoderCompiler{
 	}
 
 	@Override
-	public boolean compileFromSourceCode(String sourceCode) {
+	public boolean compileFromSourceCode(String sourceCode) throws IOException {
 		// TODO Auto-generated method stub
-		return false;
+		String fileName = TMP_DIR + TMP_NAME + ProgrammingLanguage.C_PLUS_PLUS.getExtension();
+		Path path = Paths.get(fileName);
+		Files.write(path, sourceCode.getBytes());
+		return compileFromDirectory(fileName);
 	}
 	
 	public static void main(String[] args) throws IOException {
 		String fileName = "C://Users/thanh/Desktop/demo.cpp";
 		CPlusPlusCompiler compiler = new CPlusPlusCompiler();
-		
+		compiler.compileFromDirectory(fileName);
 			
 	}
 	

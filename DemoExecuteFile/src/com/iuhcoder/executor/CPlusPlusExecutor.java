@@ -1,29 +1,35 @@
 package com.iuhcoder.executor;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 
-public class CPlusPlusExecutor {
+public class CPlusPlusExecutor implements IuhCoderExecutor{
 	
 	public static final String EXECUTE_COMMAND = "";
 	
-	public StringBuilder execute(String executeFile) throws IOException {
+	public StringBuilder execute(String executeFile, String...inputs) throws IOException {
 		StringBuilder stringBuilder = new StringBuilder();
 		Runtime runtime = Runtime.getRuntime();
 		executeFile = executeFile.replace('\\', '/');
+		System.out.println("Executing file: " + executeFile);
 		Process process = runtime.exec(EXECUTE_COMMAND + executeFile);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		String out = "";
-		while((out = reader.readLine())!=null) {
-			System.out.println(out);
+		OutputStream writer = process.getOutputStream();
+		if(inputs!= null) {
+			//write input to application
+			for(String input : inputs) {
+				writer.write((input+"\n").getBytes());
+			}
 		}
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
-		writer.write(1+"\n");
 		writer.flush();
 		writer.close();
+		String out = reader.readLine();
+		//get return data
+		do {
+			stringBuilder.append(out);
+		}while((out = reader.readLine())!=null);
 		reader.close();
 		return stringBuilder;
 	}

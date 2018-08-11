@@ -16,6 +16,7 @@ public interface IuhCoderCompiler {
 	 * 
 	 * @param sourceCode
 	 * @return
+	 * @throws IOException 
 	 */
-	public boolean compileFromSourceCode(String sourceCode);
+	public boolean compileFromSourceCode(String sourceCode) throws IOException;
 }
