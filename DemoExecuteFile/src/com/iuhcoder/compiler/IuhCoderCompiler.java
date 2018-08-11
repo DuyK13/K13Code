@@ -19,4 +19,22 @@ public interface IuhCoderCompiler {
 	 * @throws IOException 
 	 */
 	public boolean compileFromSourceCode(String sourceCode) throws IOException;
+	
+	/**
+	 * Get Execute directory
+	 * @return
+	 */
+	public String getExecuteDir();
+	
+	/**
+	 * Get execute file extension
+	 * @return
+	 */
+	public String getExecuteFileExtension();
+	
+	/**
+	 * Get execute file name
+	 * @return
+	 */
+	public String getExecuteFileTmpName();
 }

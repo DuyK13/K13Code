@@ -39,7 +39,7 @@ public class IndexHandler extends HttpServlet {
 		//gen UI here
 		out.println("<div class=\"container\">\r\n" + 
 				"  <h2 class = \"bg-success\">IuhCoder Compiler </h2>\r\n" + 
-				"  <p>(Phiên bản hiện tại chưa hỗ trợ nhập input)</p>\r\n" + 
+				"  <p>(Phiên bản hiện tại đã hỗ trợ C++ và Python)</p>\r\n" + 
 				"  <form>\r\n" + 
 				"    <div class=\"form-group\">\r\n" + 
 				"      <label for=\"comment\">Source code</label>\r\n" + 
@@ -52,7 +52,15 @@ public class IndexHandler extends HttpServlet {
 				"      <textarea  spellcheck=\"false\" class=\"form-control\" rows=\"3\" id=\"input\"></textarea>\r\n" + 
 				"    </div>\r\n" + 
 				"  </form>\r\n" + 
-				"  <input type = \"button\" onclick = \"compile()\" id = \"btnCompile\" class = \"btn btn-primary\" value = \"Compile\" />\r\n" + 
+				"  \r\n" + 
+				"<select class=\"btn\" style=\"border: solid 1px blue\" id = \"language\">\r\n" + 
+				"  <option value=\".cpp\">CPP</option>\r\n" + 
+				"  <option value=\".c\">C</option>\r\n" + 
+				"  <option value=\".java\">Java</option>\r\n" + 
+				"  <option value=\".cs\">CSharp</option>\r\n" + 
+				"  <option value=\".py\">Python</option>\r\n" + 
+				"</select>\r\n" + 
+				"  <input type = \"button\" onclick = \"compile()\" id = \"btnCompile\" class = \"btn btn-success\" value = \"Compile And Run\" />\r\n" + 
 				"  <hr>\r\n" + 
 				"  <form>\r\n" + 
 				"    <div class=\"form-group\">\r\n" + 
@@ -67,16 +75,20 @@ public class IndexHandler extends HttpServlet {
 				"function compile() {\r\n" + 
 				"  var sourceCode = $('#sourceCode').val();\r\n" + 
 				"  var inputValue = $('#input').val();\r\n" + 
+				"  var languageType = $('#language').val();\r\n" + 
+				"  $('#btnCompile').val('Compiling');\r\n" + 
 				"  \r\n" + 
 				"  $.post(\"http://localhost:9090/compile\",\r\n" + 
 				"    {\r\n" + 
 				"        source: sourceCode,\r\n" + 
-				"        input: inputValue\r\n" + 
+				"        input: inputValue,\r\n" + 
+				"        type : languageType\r\n" + 
 				"    },\r\n" + 
 				"    function(data, status){\r\n" + 
-				"        document.getElementById(\"console\").innerHTML = data;\r\n" + 
+				"        $('#console').val(data.toString());\r\n" + 
+				"        $('#btnCompile').val('Compile And Run');\r\n" + 
 				"    });\r\n" + 
-				"  \r\n" + 
+				"\r\n" + 
 				"}\r\n" + 
 				"</script>");
 		

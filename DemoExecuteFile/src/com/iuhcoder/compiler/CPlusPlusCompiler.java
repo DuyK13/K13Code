@@ -20,6 +20,7 @@ public class CPlusPlusCompiler implements IuhCoderCompiler{
 	public static final String TMP_DIR = "E:/TmpDir/";
 	public static final String TMP_NAME = "main";
 	public static final String EXECUTE_DIR = "E://Execute/";
+	public static final String EXECUTE_EXTENSION = ".exe";
 
 	@Override
 	public boolean compileFromDirectory(String sourceCodeDir) throws IOException {
@@ -53,13 +54,36 @@ public class CPlusPlusCompiler implements IuhCoderCompiler{
 		Files.write(path, sourceCode.getBytes());
 		return compileFromDirectory(fileName);
 	}
-	
-	public static void main(String[] args) throws IOException {
-		String fileName = "C://Users/thanh/Desktop/demo.cpp";
-		CPlusPlusCompiler compiler = new CPlusPlusCompiler();
-		compiler.compileFromDirectory(fileName);
-			
+
+	@Override
+	public String getExecuteDir() {
+		// TODO Auto-generated method stub
+		return EXECUTE_DIR;
+	}
+
+	@Override
+	public String getExecuteFileExtension() {
+		// TODO Auto-generated method stub
+		return EXECUTE_EXTENSION;
+	}
+
+	@Override
+	public String getExecuteFileTmpName() {
+		// TODO Auto-generated method stub
+		return TMP_NAME;
 	}
 	
+	/**
+	 * Using for test
+	 * @param args
+	 * @throws IOException
+	 */
+//	public static void main(String[] args) throws IOException {
+//		String fileName = "C://Users/thanh/Desktop/demo.cpp";
+//		CPlusPlusCompiler compiler = new CPlusPlusCompiler();
+//		compiler.compileFromDirectory(fileName);
+//			
+//	}
+//	
 	
 }
